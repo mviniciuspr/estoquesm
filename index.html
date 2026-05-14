@@ -2,33 +2,48 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>San Marino - Controle de Estoque </title>
+    <title>San Marino - Controle de Estoque</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f9; margin: 0; padding: 20px; }
         .container { max-width: 1100px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        header { border-bottom: 2px solid #eee; margin-bottom: 25px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        h1 { color: #004085; margin: 0; font-size: 24px; }
+        
+        header { border-bottom: 2px solid #eee; margin-bottom: 25px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-start; }
+        
+        /* Logo no canto superior esquerdo */
+        .logo-container { display: flex; flex-direction: column; gap: 5px; }
+        .logo { max-width: 220px; height: auto; }
+        
         .filtros { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; border: 1px solid #dee2e6; }
         select { padding: 10px; border-radius: 6px; border: 1px solid #ced4da; font-size: 16px; min-width: 200px; cursor: pointer; background: white; }
+        
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th { background: #f8f9fa; color: #333; padding: 15px; text-align: left; font-size: 13px; border-bottom: 2px solid #dee2e6; letter-spacing: 1px; }
         td { padding: 15px; border-bottom: 1px solid #eee; color: #333; font-size: 15px; background: white; }
         tr:hover td { background: #fcfcfc; }
-        .badge-dias { color: #dc3545; font-weight: 800; font-size: 16px; }
+        
+        /* Cores de status baseadas nos dias em estoque */
+        .status-atencao { color: #dc3545; font-weight: 800; font-size: 16px; } /* Vermelho (>= 15 dias) */
+        .status-novo { color: #28a745; font-weight: 800; font-size: 16px; }    /* Verde (< 15 dias) */
+        
         .placa-texto { font-weight: 700; color: #212529; font-size: 16px; }
         .loja-tag { font-weight: 800; color: #004085; text-transform: uppercase; font-size: 12px; }
+        .data-att { font-size: 12px; color: #666; font-weight: normal; margin-top: 5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        
-        <div id="resumo" style="color: #666; font-weight: bold;"></div>
+        <div class="logo-container">
+            <!-- Referência ao arquivo de imagem fornecido -->
+            <img src="WhatsApp Image 2026-05-14 at 09.11.57 (1).jpeg" alt="Logo San Marino" class="logo">
+            <div id="ultimaAtualizacao" class="data-att"></div>
+        </div>
+        <div id="resumo" style="color: #004085; font-weight: bold; font-size: 18px; margin-top: 10px;"></div>
     </header>
 
     <div class="filtros">
-        <strong>Selecione a Unidade:</strong>
+        <strong>Unidade:</strong>
         <select id="filtro" onchange="renderizar()">
             <option value="Todas">TODAS AS LOJAS</option>
             <option value="Matriz">MATRIZ</option>
@@ -45,7 +60,7 @@
                 <th>LOJA</th>
                 <th>MODELO DO VEÍCULO</th>
                 <th>PLACA</th>
-                <th>DIAS SEM FOTO</th>
+                <th>DIAS EM ESTOQUE</th>
             </tr>
         </thead>
         <tbody id="tabelaCorpo"></tbody>
@@ -54,7 +69,12 @@
 
 <script>
 /**
- * ATUALIZAÇÃO: Cole os dados entre as crases abaixo. 
+ * 1. DATA DA ÚLTIMA ATUALIZAÇÃO: Altere o texto entre as aspas abaixo
+ */
+const dataAtualizacao = "14/05/2026 - 10:00";
+
+/**
+ * 2. DADOS BRUTOS: Cole os dados da sua planilha/sistema aqui
  */
 const dadosBrutos = `
 Matriz	Cronos 1.0 Drive	SDW3H63	28
@@ -80,16 +100,16 @@ function limparEProcessar() {
                     let resto = linha.substring(u.length).trim();
                     let match = resto.match(/(.*)\s+([A-Z0-9-]{6,8})\s+(\d+)$/);
                     if (match) {
-                        return { loja: u, modelo: match[1].trim(), placa: match[2], dias: match[3] };
+                        return { loja: u, modelo: match[1].trim(), placa: match[2], dias: parseInt(match[3]) };
                     }
                 }
             }
         }
 
         if (partes.length >= 4) {
-            return { loja: partes[0], modelo: partes[1], placa: partes[2], dias: partes[3] };
+            return { loja: partes[0], modelo: partes[1], placa: partes[2], dias: parseInt(partes[3]) };
         } else if (partes.length === 3) {
-            return { loja: partes[0], modelo: partes[1], placa: "---", dias: partes[2] };
+            return { loja: partes[0], modelo: partes[1], placa: "---", dias: parseInt(partes[2]) };
         }
         return null;
     }).filter(item => item !== null);
@@ -101,25 +121,31 @@ function renderizar() {
     const filtro = document.getElementById('filtro').value;
     const corpo = document.getElementById('tabelaCorpo');
     const resumo = document.getElementById('resumo');
+    const labelData = document.getElementById('ultimaAtualizacao');
     
+    labelData.innerText = "Última atualização: " + dataAtualizacao;
     corpo.innerHTML = "";
     let cont = 0;
 
     listaFinal.forEach(c => {
         if (filtro === "Todas" || c.loja.toLowerCase() === filtro.toLowerCase()) {
             cont++;
+            
+            // Lógica de cor: menos de 15 dias fica VERDE (status-novo), caso contrário VERMELHO (status-atencao)
+            const classeStatus = c.dias < 15 ? 'status-novo' : 'status-atencao';
+
             corpo.innerHTML += `
                 <tr>
                     <td class="loja-tag">${c.loja}</td>
                     <td>${c.modelo}</td>
                     <td class="placa-texto">${c.placa}</td>
-                    <td class="badge-dias">${c.dias} dias</td>
+                    <td class="${classeStatus}">${c.dias} dias</td>
                 </tr>
             `;
         }
     });
 
-    resumo.innerText = `Total: ${cont} veículos`;
+    resumo.innerText = `Estoque Total: ${cont} veículos`;
 }
 
 renderizar();
