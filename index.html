@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>San Marino - Controle de Estoque</title>
 
     <style>
+
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: #f4f7f9;
             margin: 0;
-            padding: 20px;
+            padding: 12px;
         }
 
         .container {
             max-width: 1100px;
             margin: auto;
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         header {
-            border-bottom: 2px solid #eee;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -33,63 +35,59 @@
         .logo-container {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
         }
 
         .logo {
-            max-width: 220px;
+            max-width: 170px;
             height: auto;
         }
 
         .data-att {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
-            font-weight: normal;
-            margin-top: 5px;
         }
 
         .filtros {
             background: #f8f9fa;
-            padding: 15px;
+            padding: 10px 15px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             border: 1px solid #dee2e6;
         }
 
         select {
-            padding: 10px;
+            padding: 8px 12px;
             border-radius: 6px;
             border: 1px solid #ced4da;
-            font-size: 16px;
-            min-width: 200px;
-            cursor: pointer;
+            font-size: 15px;
+            min-width: 220px;
             background: white;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
         }
 
         th {
             background: #f8f9fa;
             color: #333;
-            padding: 15px;
+            padding: 12px;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
             border-bottom: 2px solid #dee2e6;
             letter-spacing: 1px;
         }
 
         td {
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #eee;
             color: #333;
-            font-size: 15px;
+            font-size: 14px;
             background: white;
         }
 
@@ -99,20 +97,17 @@
 
         .status-atencao {
             color: #dc3545;
-            font-weight: 800;
-            font-size: 16px;
+            font-weight: 700;
         }
 
         .status-novo {
             color: #28a745;
-            font-weight: 800;
-            font-size: 16px;
+            font-weight: 700;
         }
 
         .placa-texto {
             font-weight: 700;
             color: #212529;
-            font-size: 16px;
         }
 
         .loja-tag {
@@ -121,6 +116,14 @@
             text-transform: uppercase;
             font-size: 12px;
         }
+
+        #resumo {
+            color: #004085;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 
@@ -129,20 +132,19 @@
 <div class="container">
 
     <header>
+
         <div class="logo-container">
 
             <img src="WhatsApp Image 2026-05-14 at 09.11.57 (1).jpeg"
                  alt="Logo San Marino"
                  class="logo">
 
-            <!-- ALTERE A DATA SOMENTE NO SCRIPT -->
             <div id="ultimaAtualizacao" class="data-att"></div>
 
         </div>
 
-        <div id="resumo"
-             style="color: #004085; font-weight: bold; font-size: 18px; margin-top: 10px;">
-        </div>
+        <div id="resumo"></div>
+
     </header>
 
     <div class="filtros">
@@ -283,12 +285,6 @@ Viamão	Renegade 1.8 Sport	QNK7F25	21
         const resumo = document.getElementById('resumo');
 
         const labelData = document.getElementById('ultimaAtualizacao');
-
-        /*
-        ==========================================
-        MOSTRA DATA AUTOMATICAMENTE
-        ==========================================
-        */
 
         labelData.innerText =
             "Última atualização: " + dataAtualizacao;
