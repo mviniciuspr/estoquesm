@@ -6,25 +6,17 @@
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f9; margin: 0; padding: 20px; }
         .container { max-width: 1100px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        
         header { border-bottom: 2px solid #eee; margin-bottom: 25px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-start; }
-        
-        /* Logo no canto superior esquerdo */
         .logo-container { display: flex; flex-direction: column; gap: 5px; }
         .logo { max-width: 220px; height: auto; }
-        
         .filtros { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; border: 1px solid #dee2e6; }
         select { padding: 10px; border-radius: 6px; border: 1px solid #ced4da; font-size: 16px; min-width: 200px; cursor: pointer; background: white; }
-        
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th { background: #f8f9fa; color: #333; padding: 15px; text-align: left; font-size: 13px; border-bottom: 2px solid #dee2e6; letter-spacing: 1px; }
         td { padding: 15px; border-bottom: 1px solid #eee; color: #333; font-size: 15px; background: white; }
         tr:hover td { background: #fcfcfc; }
-        
-        /* Cores de status baseadas nos dias em estoque */
-        .status-atencao { color: #dc3545; font-weight: 800; font-size: 16px; } /* Vermelho (>= 15 dias) */
-        .status-novo { color: #28a745; font-weight: 800; font-size: 16px; }    /* Verde (< 15 dias) */
-        
+        .status-atencao { color: #dc3545; font-weight: 800; font-size: 16px; } 
+        .status-novo { color: #28a745; font-weight: 800; font-size: 16px; }    
         .placa-texto { font-weight: 700; color: #212529; font-size: 16px; }
         .loja-tag { font-weight: 800; color: #004085; text-transform: uppercase; font-size: 12px; }
         .data-att { font-size: 12px; color: #666; font-weight: normal; margin-top: 5px; }
@@ -35,7 +27,6 @@
 <div class="container">
     <header>
         <div class="logo-container">
-            <!-- Referência ao arquivo de imagem fornecido -->
             <img src="WhatsApp Image 2026-05-14 at 09.11.57 (1).jpeg" alt="Logo San Marino" class="logo">
             <div id="ultimaAtualizacao" class="data-att"></div>
         </div>
@@ -68,31 +59,27 @@
 </div>
 
 <script>
-/**
- * 1. DATA DA ÚLTIMA ATUALIZAÇÃO: Altere o texto entre as aspas abaixo
- */
-const dataAtualizacao = "14/05/2026 - 10:00";
+const dataAtualizacao = "14/05/2026 - 10:05";
 
-/**
- * 2. DADOS BRUTOS: Cole os dados da sua planilha/sistema aqui
- */
 const dadosBrutos = `
-Multimarcas	Renegade 1.8 Sport	JAR9E81	24
-Matriz	ONIX 1.4 MPFI LTZ 8V FLEX 4P MANUAL	IYG-5636	16
-Matriz	Cronos Drive 1.3	JCU7E41	15
-Matriz	Mobi 1.0 Trekking	JCZ8F30	10
-Matriz	Onix Turbo 1.0 LT	JBF2I85	10
-Matriz	Cronos 1.3 Drive	JCR2J49	9
-Matriz	Toro Freedom	JAH4C14	2
-Gravataí	Song Plus	RYV7B97	1
-Viamão	Renegade 1.8 Sport	QNK7F25	21
+Matriz	Cronos 1.0 Drive	SDW3H63	28
+Multimarcas	Renegade 1.8 Sport	JAR9E81	23
+Matriz	ONIX 1.4 MPFI LTZ 8V FLEX 4P MANUAL	IYG-5636	15
+Matriz	Cronos Drive 1.3	JCU7E41	14
+Matriz	Mobi 1.0 Trekking	JCZ8F30	9
+Matriz	Onix Turbo 1.0 LT	JBF2I85	9
+Matriz	Cronos 1.3 Drive	JCR2J49	8
+Matriz	ARGO 1.0 FIREFLY FLEX DRIVE MANUAL	JBN0F14	3
+Viamão	ARGO 1.0 FIREFLY 	JBDH0A1	2
+Zona Sul	Pulse	JHGFDA	5
+Gravataí	Cronos	JHGFHJ	10
 `;
 
 function limparEProcessar() {
     const linhas = dadosBrutos.trim().split('\n');
     const unidades = ["Matriz", "Multimarcas", "Zona Sul", "Viamão", "Gravataí"];
     
-    return linhas.map(linha => {
+    let processados = linhas.map(linha => {
         let partes = linha.split(/\t| {2,}/).map(p => p.trim()).filter(p => p !== "");
 
         if (partes.length < 3) {
@@ -114,6 +101,9 @@ function limparEProcessar() {
         }
         return null;
     }).filter(item => item !== null);
+
+    // ORDENAÇÃO: Do maior para o menor número de dias
+    return processados.sort((a, b) => b.dias - a.dias);
 }
 
 const listaFinal = limparEProcessar();
@@ -131,8 +121,6 @@ function renderizar() {
     listaFinal.forEach(c => {
         if (filtro === "Todas" || c.loja.toLowerCase() === filtro.toLowerCase()) {
             cont++;
-            
-            // Lógica de cor: menos de 15 dias fica VERDE (status-novo), caso contrário VERMELHO (status-atencao)
             const classeStatus = c.dias < 15 ? 'status-novo' : 'status-atencao';
 
             corpo.innerHTML += `
