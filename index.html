@@ -3,40 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <title>San Marino - Controle de Estoque</title>
+
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f9; margin: 0; padding: 20px; }
-        .container { max-width: 1100px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        header { border-bottom: 2px solid #eee; margin-bottom: 25px; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-start; }
-        .logo-container { display: flex; flex-direction: column; gap: 5px; }
-        .logo { max-width: 220px; height: auto; }
-        .filtros { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; border: 1px solid #dee2e6; }
-        select { padding: 10px; border-radius: 6px; border: 1px solid #ced4da; font-size: 16px; min-width: 200px; cursor: pointer; background: white; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { background: #f8f9fa; color: #333; padding: 15px; text-align: left; font-size: 13px; border-bottom: 2px solid #dee2e6; letter-spacing: 1px; }
-        td { padding: 15px; border-bottom: 1px solid #eee; color: #333; font-size: 15px; background: white; }
-        tr:hover td { background: #fcfcfc; }
-        .status-atencao { color: #dc3545; font-weight: 800; font-size: 16px; } 
-        .status-novo { color: #28a745; font-weight: 800; font-size: 16px; }    
-        .placa-texto { font-weight: 700; color: #212529; font-size: 16px; }
-        .loja-tag { font-weight: 800; color: #004085; text-transform: uppercase; font-size: 12px; }
-        .data-att { font-size: 12px; color: #666; font-weight: normal; margin-top: 5px; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        header {
+            border-bottom: 2px solid #eee;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .logo {
+            max-width: 220px;
+            height: auto;
+        }
+
+        .data-att {
+            font-size: 12px;
+            color: #666;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        .filtros {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid #dee2e6;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            min-width: 200px;
+            cursor: pointer;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #333;
+            padding: 15px;
+            text-align: left;
+            font-size: 13px;
+            border-bottom: 2px solid #dee2e6;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            font-size: 15px;
+            background: white;
+        }
+
+        tr:hover td {
+            background: #fcfcfc;
+        }
+
+        .status-atencao {
+            color: #dc3545;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .status-novo {
+            color: #28a745;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .placa-texto {
+            font-weight: 700;
+            color: #212529;
+            font-size: 16px;
+        }
+
+        .loja-tag {
+            font-weight: 800;
+            color: #004085;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
     </style>
 </head>
+
 <body>
 
-<header>
-    <div class="logo-container">
-        <img src="WhatsApp Image 2026-05-14 at 09.11.57 (1).jpeg" alt="Logo San Marino" class="logo">
+<div class="container">
 
-        <!-- DATA AUTOMÁTICA -->
-        <div id="ultimaAtualizacao" class="data-att"></div>
-    </div>
+    <header>
+        <div class="logo-container">
 
-    <div id="resumo" style="color: #004085; font-weight: bold; font-size: 18px; margin-top: 10px;"></div>
-</header>
+            <img src="WhatsApp Image 2026-05-14 at 09.11.57 (1).jpeg"
+                 alt="Logo San Marino"
+                 class="logo">
+
+            <!-- ALTERE A DATA SOMENTE NO SCRIPT -->
+            <div id="ultimaAtualizacao" class="data-att"></div>
+
+        </div>
+
+        <div id="resumo"
+             style="color: #004085; font-weight: bold; font-size: 18px; margin-top: 10px;">
+        </div>
+    </header>
 
     <div class="filtros">
+
         <strong>Unidade:</strong>
+
         <select id="filtro" onchange="renderizar()">
             <option value="Todas">TODAS AS LOJAS</option>
             <option value="Matriz">MATRIZ</option>
@@ -45,9 +157,11 @@
             <option value="Viamão">VIAMÃO</option>
             <option value="Gravataí">GRAVATAÍ</option>
         </select>
+
     </div>
 
     <table>
+
         <thead>
             <tr>
                 <th>LOJA</th>
@@ -56,14 +170,30 @@
                 <th>DIAS EM ESTOQUE</th>
             </tr>
         </thead>
+
         <tbody id="tabelaCorpo"></tbody>
+
     </table>
+
 </div>
 
 <script>
-const dataAtualizacao = "14/05/2026 - 15:35";
 
-const dadosBrutos = `
+    /*
+    ==========================================
+    ALTERE SOMENTE ESTA LINHA
+    ==========================================
+    */
+
+    const dataAtualizacao = "14/05/2026 - 15:35";
+
+    /*
+    ==========================================
+    DADOS DOS VEÍCULOS
+    ==========================================
+    */
+
+    const dadosBrutos = `
 Multimarcas	Renegade 1.8 Sport	JAR9E81	24
 Matriz	ONIX 1.4 MPFI LTZ 8V FLEX 4P MANUAL	IYG-5636	16
 Matriz	Cronos Drive 1.3	JCU7E41	15
@@ -74,69 +204,132 @@ Gravataí	Song Plus	RYV7B97	1
 Viamão	Renegade 1.8 Sport	QNK7F25	21
 `;
 
-function limparEProcessar() {
-    const linhas = dadosBrutos.trim().split('\n');
-    const unidades = ["Matriz", "Multimarcas", "Zona Sul", "Viamão", "Gravataí"];
-    
-    let processados = linhas.map(linha => {
-        let partes = linha.split(/\t| {2,}/).map(p => p.trim()).filter(p => p !== "");
+    function limparEProcessar() {
 
-        if (partes.length < 3) {
-            for (let u of unidades) {
-                if (linha.startsWith(u)) {
-                    let resto = linha.substring(u.length).trim();
-                    let match = resto.match(/(.*)\s+([A-Z0-9-]{6,8})\s+(\d+)$/);
-                    if (match) {
-                        return { loja: u, modelo: match[1].trim(), placa: match[2], dias: parseInt(match[3]) };
+        const linhas = dadosBrutos.trim().split('\n');
+
+        const unidades = [
+            "Matriz",
+            "Multimarcas",
+            "Zona Sul",
+            "Viamão",
+            "Gravataí"
+        ];
+
+        let processados = linhas.map(linha => {
+
+            let partes = linha
+                .split(/\t| {2,}/)
+                .map(p => p.trim())
+                .filter(p => p !== "");
+
+            if (partes.length < 3) {
+
+                for (let u of unidades) {
+
+                    if (linha.startsWith(u)) {
+
+                        let resto = linha.substring(u.length).trim();
+
+                        let match = resto.match(/(.*)\s+([A-Z0-9-]{6,8})\s+(\d+)$/);
+
+                        if (match) {
+
+                            return {
+                                loja: u,
+                                modelo: match[1].trim(),
+                                placa: match[2],
+                                dias: parseInt(match[3])
+                            };
+                        }
                     }
                 }
             }
-        }
 
-        if (partes.length >= 4) {
-            return { loja: partes[0], modelo: partes[1], placa: partes[2], dias: parseInt(partes[3]) };
-        } else if (partes.length === 3) {
-            return { loja: partes[0], modelo: partes[1], placa: "---", dias: parseInt(partes[2]) };
-        }
-        return null;
-    }).filter(item => item !== null);
+            if (partes.length >= 4) {
 
-    // ORDENAÇÃO: Do maior para o menor número de dias
-    return processados.sort((a, b) => b.dias - a.dias);
-}
+                return {
+                    loja: partes[0],
+                    modelo: partes[1],
+                    placa: partes[2],
+                    dias: parseInt(partes[3])
+                };
 
-const listaFinal = limparEProcessar();
+            } else if (partes.length === 3) {
 
-function renderizar() {
-    const filtro = document.getElementById('filtro').value;
-    const corpo = document.getElementById('tabelaCorpo');
-    const resumo = document.getElementById('resumo');
-    const labelData = document.getElementById('ultimaAtualizacao');
-    
-    labelData.innerText = "Última atualização: " + dataAtualizacao;
-    corpo.innerHTML = "";
-    let cont = 0;
+                return {
+                    loja: partes[0],
+                    modelo: partes[1],
+                    placa: "---",
+                    dias: parseInt(partes[2])
+                };
+            }
 
-    listaFinal.forEach(c => {
-        if (filtro === "Todas" || c.loja.toLowerCase() === filtro.toLowerCase()) {
-            cont++;
-            const classeStatus = c.dias < 15 ? 'status-novo' : 'status-atencao';
+            return null;
 
-            corpo.innerHTML += `
-                <tr>
-                    <td class="loja-tag">${c.loja}</td>
-                    <td>${c.modelo}</td>
-                    <td class="placa-texto">${c.placa}</td>
-                    <td class="${classeStatus}">${c.dias} dias</td>
-                </tr>
-            `;
-        }
-    });
+        }).filter(item => item !== null);
 
-    resumo.innerText = `Estoque Total: ${cont} veículos`;
-}
+        return processados.sort((a, b) => b.dias - a.dias);
+    }
 
-renderizar();
+    const listaFinal = limparEProcessar();
+
+    function renderizar() {
+
+        const filtro = document.getElementById('filtro').value;
+
+        const corpo = document.getElementById('tabelaCorpo');
+
+        const resumo = document.getElementById('resumo');
+
+        const labelData = document.getElementById('ultimaAtualizacao');
+
+        /*
+        ==========================================
+        MOSTRA DATA AUTOMATICAMENTE
+        ==========================================
+        */
+
+        labelData.innerText =
+            "Última atualização: " + dataAtualizacao;
+
+        corpo.innerHTML = "";
+
+        let cont = 0;
+
+        listaFinal.forEach(c => {
+
+            if (
+                filtro === "Todas" ||
+                c.loja.toLowerCase() === filtro.toLowerCase()
+            ) {
+
+                cont++;
+
+                const classeStatus =
+                    c.dias < 15
+                    ? 'status-novo'
+                    : 'status-atencao';
+
+                corpo.innerHTML += `
+                    <tr>
+                        <td class="loja-tag">${c.loja}</td>
+                        <td>${c.modelo}</td>
+                        <td class="placa-texto">${c.placa}</td>
+                        <td class="${classeStatus}">
+                            ${c.dias} dias
+                        </td>
+                    </tr>
+                `;
+            }
+        });
+
+        resumo.innerText =
+            `Estoque Total: ${cont} veículos`;
+    }
+
+    renderizar();
+
 </script>
 
 </body>
