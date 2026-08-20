@@ -225,30 +225,7 @@
 </head>
 <body>
 
-<div class="editor-wrap">
-  <h2>📋 Cole os dados da planilha (Loja, Modelo, Placa, Dias)</h2>
-  <div class="editor-row">
-    <textarea id="csvInput" placeholder="Loja	Modelo	Placa	Dias
-Matriz	Cronos 1.0 Drive	SDW3H63	28
-Zona Sul	Mobi 1.0 Like	SID6A57	49
-Viamão	Strada 1.3 Ranch	JCA2J93	19
-..."></textarea>
-    <div class="editor-side">
-      <div>
-        <label>Data de atualização</label><br>
-        <input type="date" id="dataAtualizacao">
-      </div>
-      <button class="btn-gerar" onclick="gerarRelatorio()">▶ Gerar Relatório</button>
-      <button class="btn-imprimir" onclick="window.print()">🖨 Imprimir / Salvar PDF</button>
-      <button class="btn-png" id="btnPng" onclick="exportarPNG()" style="display: inline-block;">📷 Exportar PNG</button>
-      <div class="hint">
-        Cole direto do Excel (Ctrl+C → Ctrl+V)<br>
-        Colunas: <b>Loja · Modelo · Placa · Dias</b><br>
-        Linha de cabeçalho é ignorada automaticamente.
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div id="report" style="display: block;" class="">
     <div class="rpt-header">
