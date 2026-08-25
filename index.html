@@ -8,47 +8,6 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; }
 
-  /* ── EDITOR AREA ── */
-  .editor-wrap {
-    background: #fff;
-    border-bottom: 2px solid #e0e4ea;
-    padding: 20px 24px;
-  }
-  .editor-wrap h2 { font-size: 15px; color: #444; margin-bottom: 12px; }
-  .editor-row { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
-  .editor-row textarea {
-    flex: 1; min-width: 260px; height: 130px;
-    font-family: monospace; font-size: 12px;
-    border: 1px solid #ccc; border-radius: 6px; padding: 10px;
-    resize: vertical; background: #fafafa;
-  }
-  .editor-side { display: flex; flex-direction: column; gap: 10px; min-width: 200px; }
-  .editor-side label { font-size: 12px; color: #666; }
-  .editor-side input[type="date"] {
-    padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px;
-    font-size: 13px; background: #fff;
-  }
-  .btn-gerar {
-    background: #1a2f6e; color: #fff; border: none;
-    padding: 11px 28px; border-radius: 7px;
-    font-size: 14px; font-weight: 600; cursor: pointer;
-    letter-spacing: 0.3px;
-  }
-  .btn-gerar:hover { background: #142558; }
-  .btn-imprimir {
-    background: #fff; color: #1a2f6e;
-    border: 1.5px solid #1a2f6e; padding: 9px 18px;
-    border-radius: 7px; font-size: 13px; cursor: pointer;
-  }
-  .btn-imprimir:hover { background: #f0f4ff; }
-  .btn-png {
-    background: #27ae60; color: #fff; border: none;
-    padding: 9px 18px; border-radius: 7px;
-    font-size: 13px; cursor: pointer; font-weight: 600;
-  }
-  .btn-png:hover { background: #1e8449; }
-  .btn-png:disabled { background: #aaa; cursor: not-allowed; }
-  .hint { font-size: 11px; color: #999; margin-top: 6px; line-height: 1.5; }
 
   /* ── REPORT CONTAINER ── */
   #report { display: none; padding: 24px; max-width: 1180px; margin: 0 auto; }
@@ -150,10 +109,6 @@
   }
   @media (max-width: 720px) {
     #report { padding: 10px; width: 100%; }
-    .editor-wrap { padding: 14px 12px; }
-    .editor-row { display: block; }
-    .editor-row textarea { width: 100%; min-width: 0; }
-    .editor-side { margin-top: 12px; min-width: 0; }
     .rpt-header { padding: 16px; gap: 12px; align-items: center; }
     .rpt-title { font-size: 20px; }
     .rpt-subtitle { font-size: 11px; }
@@ -187,59 +142,27 @@
     .alert-text { font-size: 12px; }
   }
 
-  /* APRESENTAÇÃO DA TABELA E EXPORTAÇÃO */
-  @media (min-width: 721px) {
-    .vehicle-model { min-width: 235px; }
-    td[data-label="Placa"] { min-width: 100px; }
-    .dias-cell { min-width: 82px; }
-    td[data-label="Status"] { min-width: 155px; }
-    td[data-label="Posição atual"] { min-width: 190px; }
-    .last-update { min-width: 145px; white-space: normal; }
-    .save-cell { width: 76px; text-align: right; }
-  }
-  #report.export-mode { max-width: 1180px; width: 1180px; }
-  #report.export-mode .save-cell,
-  #report.export-mode th:last-child { display: none !important; }
-  #report.export-mode td[data-export-value] select,
-  #report.export-mode td[data-export-value] input { display: none !important; }
-  #report.export-mode td[data-export-value]::after {
-    content: attr(data-export-value); display: block; min-height: 28px;
-    padding: 6px 8px; border-radius: 5px; background: #f5f7fb;
-    color: #27334d; font-size: 12px; line-height: 1.35;
-    white-space: normal; overflow-wrap: anywhere;
-  }
-  #report.export-mode .last-update { padding-right: 10px; }
-  @media (max-width: 720px) {
-    #report.export-mode { width: 100%; max-width: 100%; }
-    #report.export-mode tbody td.save-cell { display: none !important; }
-    #report.export-mode td[data-export-value]::after { min-height: 36px; padding: 9px; }
-  }
   /* PRINT */
   @media print {
-    .editor-wrap { display: none; }
     #report { display: block !important; padding: 0; }
     body { background: white; }
   }
 </style>
-<script src="./hoje fotos_files/html2canvas.min.js.download"></script>
 </head>
 <body>
-
-
-
-<div id="report" style="display: block;" class="">
+<div id="report" style="display: block;">
     <div class="rpt-header">
       <div>
         <div style="font-size: 22px; font-weight: 900; color: #1a2f6e; letter-spacing: -0.5px; margin-bottom: 4px;">SAN MARINO</div>
         <div class="rpt-title">Carros sem fotos no site</div>
         <div class="rpt-subtitle">Situação no NBS: todos disponíveis</div>
-        <div class="rpt-date">Atualizado em: <strong>20/08/2026</strong></div>
+        <div class="rpt-date">Atualizado em: <strong>25/08/2026</strong></div>
       </div>
       <div class="rpt-total">
         <div class="rpt-total-icon">🚗</div>
         <div class="rpt-total-info">
           <span class="rpt-total-label">Total:</span>
-          <span class="rpt-total-num">32</span>
+          <span class="rpt-total-num">28</span>
           <span class="rpt-total-sub">veículos</span>
         </div>
       </div>
@@ -247,13 +170,13 @@
       <div class="store-card">
         <div class="store-icon">🏪</div>
         <div class="store-name">Matriz</div>
-        <div class="store-count">16</div>
+        <div class="store-count">20</div>
         <div class="store-vei">veículos</div>
       </div>
       <div class="store-card">
         <div class="store-icon">📍</div>
         <div class="store-name">Zona Sul</div>
-        <div class="store-count">7</div>
+        <div class="store-count">2</div>
         <div class="store-vei">veículos</div>
       </div>
       <div class="store-card">
@@ -265,7 +188,7 @@
       <div class="store-card">
         <div class="store-icon">🏷</div>
         <div class="store-name">Multimarcas</div>
-        <div class="store-count">6</div>
+        <div class="store-count">3</div>
         <div class="store-vei">veículos</div>
       </div></div><div class="status-help"><strong>.</div>
       <div class="store-section">
@@ -286,117 +209,117 @@
                 <td class="num-cell">1</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>T-CROSS 1.0 200TSI</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAN1F81</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">43 dias</td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">46 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JAN1F81"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JAN1F81" value="20/08 - Avaria - Luzes painel" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:00</td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>25/08/2026, 09:29</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAN1F81&#39;)">Salvar</button></td>
               </tr>
               <tr class="status-row-warning">
                 <td class="num-cell">2</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>TRACKER 1.0 TURBO LT</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JBG6D11</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">30 dias</td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">35 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JBG6D11"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JBG6D11" value="20/08 - Chapeação" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:00</td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>25/08/2026, 09:29</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JBG6D11&#39;)">Salvar</button></td>
               </tr>
               <tr class="status-row-warning">
                 <td class="num-cell">3</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>PULSE 1.0 TURBO 200 FLEX DRIVE CVT</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JBF9G85</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">30 dias</td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">35 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JBF9G85"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JBF9G85" value="20/08 - Polimento e Higienização" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:00</td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>25/08/2026, 09:29</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JBF9G85&#39;)">Salvar</button></td>
               </tr>
-              <tr class="status-row-warning">
+              <tr class="status-row-alert">
                 <td class="num-cell">4</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>LOGAN 1.6 ZEN</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAR5G25</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">29 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JAR5G25"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JAR5G25" value="20/08 - Polimento e Higienização" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:00</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAR5G25&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="status-row-warning">
-                <td class="num-cell">5</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>TORO 1.3 T270 VOLCANO AT6</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCH4J96</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">24 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JCH4J96"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JCH4J96" value="20/08 - Polimento e Higienização" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:01</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCH4J96&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">6</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>TORO 1.3 TURBO 270 FLEX VOLCANO AT6</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCS9C43</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">16 dias</td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">21 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JCS9C43"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JCS9C43" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge alert">ATUALIZAR</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCS9C43&#39;)">Salvar</button></td>
               </tr>
-              <tr class="">
-                <td class="num-cell">7</td>
+              <tr class="status-row-alert">
+                <td class="num-cell">5</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>KA 1.0 SE / PLUS TI-VCT FLEX MANUAL</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IZP8G62</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">16 dias</td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">21 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="IZP8G62"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="IZP8G62" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge alert">ATUALIZAR</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IZP8G62&#39;)">Salvar</button></td>
               </tr>
-              <tr class="">
-                <td class="num-cell">8</td>
+              <tr class="status-row-alert">
+                <td class="num-cell">6</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>ONIX 1.0 TURBO LTZ</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">RVX7A74</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">15 dias</td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">20 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="RVX7A74"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="RVX7A74" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge alert">ATUALIZAR</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;RVX7A74&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="status-row-alert">
+                <td class="num-cell">7</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>ARGO 1.3 FIREFLY FLEX TREKKING MANUAL</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAU4F70</span></td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">19 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JAU4F70"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JAU4F70" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge alert">ATUALIZAR</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAU4F70&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="status-row-alert">
+                <td class="num-cell">8</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>CRETA 1.6 16V FLEX ACTION AUTOMÁTICO</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCJ8E96</span></td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">18 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JCJ8E96"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JCJ8E96" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge alert">ATUALIZAR</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCJ8E96&#39;)">Salvar</button></td>
               </tr>
               <tr class="">
                 <td class="num-cell">9</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>ARGO 1.3 FIREFLY FLEX TREKKING MANUAL</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAU4F70</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">14 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JAU4F70"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JAU4F70" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAU4F70&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">10</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>Onix 1.0 Joy</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IYF-9454</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">12 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="IYF-9454"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="IYF-9454" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IYF-9454&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">11</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>TORO 1.3 TURBO 270 FLEX FREEDOM AT6</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCX9E34</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">10 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">15 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JCX9E34"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JCX9E34" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCX9E34&#39;)">Salvar</button></td>
               </tr>
               <tr class="">
+                <td class="num-cell">10</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>CRONOS 1.3 FIREFLY FLEX MANUAL</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JBO3A47</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">15 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JBO3A47"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JBO3A47" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JBO3A47&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
+                <td class="num-cell">11</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>Onix 1.0 Joy</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IYF-9454</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">14 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="IYF-9454"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="IYF-9454" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IYF-9454&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
                 <td class="num-cell">12</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>TORO 2.0 16V TURBO DIESEL VOLCANO 4WD AT9</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCG5G42</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">7 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">12 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JCG5G42"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JCG5G42" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
@@ -406,7 +329,7 @@
                 <td class="num-cell">13</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>COMPASS 2.0 16V FLEX LONGITUDE AUTOMATICO</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IZY5J33</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">7 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">12 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="IZY5J33"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="IZY5J33" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
@@ -416,7 +339,7 @@
                 <td class="num-cell">14</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>TORO ENDURANCE AT</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">TQW4E09</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">5 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">8 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="TQW4E09"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="TQW4E09" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
@@ -426,7 +349,7 @@
                 <td class="num-cell">15</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>VIRTUS 1.0 170 TSI AUTOMÁTICO</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCC4G84</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">6 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JCC4G84"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JCC4G84" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
@@ -436,11 +359,51 @@
                 <td class="num-cell">16</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>UP 1.0 170 TSI TOTAL FLEX XTREME 4P MANUAL</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAO5G05</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">6 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JAO5G05"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JAO5G05" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAO5G05&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
+                <td class="num-cell">17</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>C3 FEEL 1.0 MT</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">RVR8B26</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">5 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="RVR8B26"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="RVR8B26" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;RVR8B26&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
+                <td class="num-cell">18</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>TORO FREEDOM AT6</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IZN2D20</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">5 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="IZN2D20"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="IZN2D20" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IZN2D20&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
+                <td class="num-cell">19</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>STRADA 1.3 FIREFLY FLEX VOLCANO CD CVT</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCI1B63</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JCI1B63"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JCI1B63" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCI1B63&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
+                <td class="num-cell">20</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>STRADA 1.3 FIREFLY FLEX VOLCANO CD MANUAL</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAO8J54</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">1 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JAO8J54"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JAO8J54" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAO8J54&#39;)">Salvar</button></td>
               </tr>
             </tbody>
           </table>
@@ -460,71 +423,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="status-row-warning">
+              <tr class="">
                 <td class="num-cell">1</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>ARGO 1.0 DRIVE</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCV4H69</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">24 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JCV4H69"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JCV4H69" value="Não informado" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:02</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCV4H69&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="status-row-warning">
-                <td class="num-cell">2</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>ECOSPORT 1.5 TI-VCT FLEX FREESTYLE MANUAL</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">QQH8E42</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">17 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="QQH8E42"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="QQH8E42" value="Não informado" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>20/08/2026, 09:01</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;QQH8E42&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">3</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>COROLLA 2.0 XEI 16V FLEX 4P AUTOMATICO</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IWW-5956</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">15 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="IWW-5956"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="IWW-5956" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IWW-5956&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">4</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>ARGO 1.0</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAJ4A91</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">13 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JAJ4A91"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JAJ4A91" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAJ4A91&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">5</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>ARGO 1.0 FIREFLY FLEX DRIVE MANUAL</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JAO0I39</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">8 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JAO0I39"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JAO0I39" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JAO0I39&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">6</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>KWID 1.0 12V SCE FLEX OUTSIDER MANUAL</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">BEZ5B54</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">7 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">11 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="BEZ5B54"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="BEZ5B54" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;BEZ5B54&#39;)">Salvar</button></td>
               </tr>
               <tr class="">
-                <td class="num-cell">7</td>
+                <td class="num-cell">2</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>FASTBACK 1.0 TURBO 200 FLEX CVT</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">TRB3G45</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">6 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="TRB3G45"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="TRB3G45" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
@@ -550,33 +463,33 @@
             <tbody>
               <tr class="">
                 <td class="num-cell">1</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>TRACKER 1.0 TURBO FLEX LT AUTOMATICO</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JBR5D39</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">16 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JBR5D39"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JBR5D39" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JBR5D39&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">2</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>TORO 1.3 TURBO 270 FLEX FREEDOM AT6</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCR4C78</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">8 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">13 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JCR4C78"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JCR4C78" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCR4C78&#39;)">Salvar</button></td>
               </tr>
               <tr class="">
-                <td class="num-cell">3</td>
+                <td class="num-cell">2</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>STRADA ULTRA 1.0 FLEX TURBO CD AUT</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCP5B40</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">7 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JCP5B40"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JCP5B40" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCP5B40&#39;)">Salvar</button></td>
+              </tr>
+              <tr class="">
+                <td class="num-cell">3</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>PULSE 1.3 DRIVE</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JBP4F04</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">6 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JBP4F04"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JBP4F04" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JBP4F04&#39;)">Salvar</button></td>
               </tr>
             </tbody>
           </table>
@@ -596,70 +509,40 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="status-row-alert">
+              <tr class="status-row-warning">
                 <td class="num-cell">1</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>VIRTUS 1.6 MSI TOTAL FLEX MANUAL</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IZB0C23</span></td>
-                <td class="dias-cell urgente" data-label="Dias no NBS">17 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="IZB0C23"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="IZB0C23" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge alert">ATUALIZAR</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IZB0C23&#39;)">Salvar</button></td>
+                <td class="vehicle-model" data-label="Veículo"><strong>TRACKER 1.0 TURBO FLEX LT AUTOMATICO</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JBR5D39</span></td>
+                <td class="dias-cell urgente" data-label="Dias no NBS">23 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JBR5D39"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro" selected="">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JBR5D39" value="25/08 - Pintura" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="last-update" data-label="Última informação"><span class="status-badge saved">REGISTRADO</span><br>25/08/2026, 09:37</td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JBR5D39&#39;)">Salvar</button></td>
               </tr>
               <tr class="">
                 <td class="num-cell">2</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>CIVIC 2.0 16V FLEXONE EX 4P CVT</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">IYY-4034</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">16 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="IYY-4034"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="IYY-4034" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;IYY-4034&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">3</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>ONIX 1.0 TURBO PLUS PREMIER</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCP4D38</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">13 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JCP4D38"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JCP4D38" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCP4D38&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">4</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>STRADA 1.3 VOLCANO CD CVT</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCE6D47</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">13 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JCE6D47"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JCE6D47" value="" placeholder="Ex.: Pátio Matriz"></td>
-                <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCE6D47&#39;)">Salvar</button></td>
-              </tr>
-              <tr class="">
-                <td class="num-cell">5</td>
                 <td class="vehicle-model" data-label="Veículo"><strong>FASTBACK 1.0 TURBO 200 FLEX AUDACE CVT</strong></td>
                 <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JDB6B32</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
+                <td class="dias-cell ok" data-label="Dias no NBS">6 dias</td>
                 <td data-label="Status"><select class="status-select" data-status="JDB6B32"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
                 <td data-label="Posição atual"><input class="position-input" data-position="JDB6B32" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
                 <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JDB6B32&#39;)">Salvar</button></td>
               </tr>
               <tr class="">
-                <td class="num-cell">6</td>
-                <td class="vehicle-model" data-label="Veículo"><strong>FIORINO ENDURANCE EVO 1.4 FLEX 8V 2P</strong></td>
-                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCV6C48</span></td>
-                <td class="dias-cell ok" data-label="Dias no NBS">4 dias</td>
-                <td data-label="Status"><select class="status-select" data-status="JCV6C48"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
-                <td data-label="Posição atual"><input class="position-input" data-position="JCV6C48" value="" placeholder="Ex.: Pátio Matriz"></td>
+                <td class="num-cell">3</td>
+                <td class="vehicle-model" data-label="Veículo"><strong>FASTBACK 1.0 TURBO 200 FLEX AUDACE CVT</strong></td>
+                <td data-label="Placa"><span style="font-family: monospace; font-size: 14px; background: #f0f2f5; padding: 2px 6px; border-radius: 4px;">JCA6F68</span></td>
+                <td class="dias-cell ok" data-label="Dias no NBS">1 dias</td>
+                <td data-label="Status"><select class="status-select" data-status="JCA6F68"><option value="">Selecione</option><option value="Aguardando fotos">Aguardando fotos</option><option value="Em deslocamento">Em deslocamento</option><option value="No pátio">No pátio</option><option value="Em preparação">Em preparação</option><option value="Fotos realizadas">Fotos realizadas</option><option value="Outro">Outro</option></select></td>
+                <td data-label="Posição atual"><input class="position-input" data-position="JCA6F68" value="" placeholder="Ex.: Pátio Matriz"></td>
                 <td class="last-update" data-label="Última informação"><span class="status-badge saved">OPCIONAL</span><br>Nunca informado</td>
-                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCV6C48&#39;)">Salvar</button></td>
+                <td class="save-cell"><button class="save-status" onclick="saveVehicleStatus(&#39;JCA6F68&#39;)">Salvar</button></td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div><div class="alert-box"><div class="alert-icon">⚠</div><div class="alert-text"><strong>1 veículo(s) precisam de atualização.</strong> Informe obrigatoriamente o status e a posição atual. O alerta inicia aos <span class="dias-destaque">17 dias</span> e retorna a cada 4 dias sem nova informação.</div></div></div>
+      </div><div class="alert-box"><div class="alert-icon">⚠</div><div class="alert-text"><strong>.</div></div></div>
 
 <script>
   // set today's date by default
@@ -681,44 +564,8 @@
     const position = document.querySelector(`[data-position="${placa}"]`).value.trim();
     if (!status || !position) { alert('Informe o status e a posi\u00e7\u00e3o atual do ve\u00edculo.'); return; }
     const all = loadStatusData(); all[placa] = { status, position, updatedAt: new Date().toISOString() };
-    localStorage.setItem(STATUS_STORAGE_KEY, JSON.stringify(all)); gerarRelatorio(false);
+    localStorage.setItem(STATUS_STORAGE_KEY, JSON.stringify(all));
   }
-
-  function parseCSV(raw) {
-    const lines = raw.trim().split('\n').filter(l => l.trim());
-    const rows = [];
-    for (const line of lines) {
-      const parts = line.split('\t').map(s => s.trim());
-      if (parts.length < 4) continue;
-      const [loja, modelo, placa, diasRaw] = parts;
-      const dias = parseInt(diasRaw);
-      if (isNaN(dias)) continue; // skip header
-      rows.push({ loja, modelo, placa, dias });
-    }
-    return rows;
-  }
-
-  function diasClass(d) {
-    if (d >= 17) return 'urgente';
-    return 'ok';
-  }
-
-  function fmtDate(str) {
-    if (!str) return '';
-    const [y,m,d] = str.split('-');
-    return `${d}/${m}/${y}`;
-  }
-
-  function gerarRelatorio(scrollToReport = true) {
-    const raw = document.getElementById('csvInput').value;
-    const dataVal = document.getElementById('dataAtualizacao').value;
-    const dados = parseCSV(raw);
-    const savedStatuses = loadStatusData();
-
-    if (!dados.length) {
-      alert('Nenhum dado válido encontrado. Verifique o formato: Loja↹Modelo↹Placa↹Dias');
-      return;
-    }
 
     // group by store
     const byStore = {};
@@ -834,47 +681,6 @@
     if(btnPng) btnPng.style.display = 'inline-block';
     
     if (scrollToReport) container.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function exportarPNG() {
-    const target = document.getElementById('report');
-    const btn = document.getElementById('btnPng');
-    if (!target) return;
-    
-    btn.disabled = true;
-    btn.innerText = '⏳ Gerando imagem...';
-    // No PNG, mostra os valores como texto e remove os controles de edição.
-    target.querySelectorAll('td[data-label="Status"]').forEach(td => {
-      const select = td.querySelector('select');
-      td.dataset.exportValue = select && select.value ? select.value : 'Não informado';
-    });
-    target.querySelectorAll('td[data-label="Posição atual"]').forEach(td => {
-      const input = td.querySelector('input');
-      td.dataset.exportValue = input && input.value.trim() ? input.value.trim() : 'Não informada';
-    });
-    target.classList.add('export-mode');
-    html2canvas(target, {
-      backgroundColor: '#f0f2f5',
-      scale: 2,
-      logging: false,
-      useCORS: true
-    }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = `carros-sem-fotos-${document.getElementById('dataAtualizacao').value}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      target.classList.remove('export-mode');
-      target.querySelectorAll('[data-export-value]').forEach(td => delete td.dataset.exportValue);
-      btn.disabled = false;
-      btn.innerText = '📷 Exportar PNG';
-    }).catch(err => {
-      console.error(err);
-      target.classList.remove('export-mode');
-      target.querySelectorAll('[data-export-value]').forEach(td => delete td.dataset.exportValue);
-      alert('Erro ao gerar imagem.');
-      btn.disabled = false;
-      btn.innerText = '📷 Exportar PNG';
-    });
   }
 </script>
 
