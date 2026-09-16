@@ -1,81 +1,1587 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SAN MARINO — Carros sem fotos no site</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-:root{--blue:#1f3a78;--bg:#eef1f5;--card:#fff;--border:#d9dee8;--field:#f1f4f8;--green:#2aa66b;--yellow:#fff8e7;--red:#dd4035}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#1f2937;font-family:Arial,Helvetica,sans-serif;font-size:12px}.page{max-width:1200px;margin:auto;padding:10px 12px 18px}
-.toolbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--blue);border-radius:10px;padding:9px 12px;margin:0 0 10px;box-shadow:0 3px 10px rgba(23,51,101,.12)}
-.toolbar-title{font-size:13px;font-weight:800;color:var(--blue);white-space:nowrap}.toolbar select{border:2px solid var(--blue);border-radius:7px;background:#fff;color:var(--blue);padding:7px 11px;font-size:13px;font-weight:800;min-width:220px;cursor:pointer}#storeResult{margin-left:auto;color:#687386;font-size:11px;font-weight:600}#storeResult:before{content:"●";color:var(--green);margin-right:6px}
-.header{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:flex-start}.brand,h1{color:var(--blue);margin:0;font-weight:800}.brand{font-size:20px}h1{font-size:21px;line-height:1.05;margin-top:2px}.subtitle{color:#89919e;font-size:10px;margin-top:4px}.updated{color:#929aa7;font-size:9px;margin-top:2px}
-.total-box{width:92px;min-height:62px;background:var(--blue);color:#fff;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center}.total-box .label,.total-box .foot{font-size:9px;opacity:.9}.total-box .n{font-size:25px;font-weight:800;line-height:1;margin:3px 0}
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:9px 0}.summary-card{background:#fff;border:1px solid var(--border);border-radius:9px;min-height:68px;padding:9px;display:flex;flex-direction:column;align-items:center;justify-content:center}.summary-card .icon{font-size:16px;margin-bottom:4px}.summary-card .name{color:var(--blue);font-weight:700;font-size:11px}.summary-card .count{color:var(--blue);font-size:19px;font-weight:800;margin:1px 0}.summary-card .unit{color:#8f97a5;font-size:9px}
-.notice{background:#eaf2ff;border:1px solid #bdd1f7;color:#3c5687;border-radius:7px;padding:7px 10px;margin-bottom:10px;font-size:10px}.store{margin-bottom:10px}.store-title{background:var(--blue);color:#fff;font-weight:800;padding:7px 10px;border-radius:8px 8px 0 0;font-size:12px}.table-wrap{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;table-layout:fixed}thead th{text-align:left;background:#f5f7fa;color:#29406e;font-weight:700;font-size:9px;padding:6px 7px;border-bottom:1px solid #dfe4eb}tbody td{padding:5px 7px;border-bottom:1px solid #ebedf1;vertical-align:middle;font-size:10px}tbody tr:last-child td{border-bottom:none}tbody tr.attention td{background:var(--yellow)}
-th:nth-child(1),td:nth-child(1){width:30px;text-align:center;color:#a0a7b2}th:nth-child(2),td:nth-child(2){width:29%}th:nth-child(3),td:nth-child(3){width:9%}th:nth-child(4),td:nth-child(4){width:10%}th:nth-child(5),td:nth-child(5){width:15%}th:nth-child(6),td:nth-child(6){width:20%}th:nth-child(7),td:nth-child(7){width:16%}
-.model{font-weight:700;color:#303846;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plate{background:#eef1f5;border-radius:4px;padding:4px 6px;display:inline-block;color:#4f5968;font-family:Consolas,monospace;font-size:9px}.days{font-weight:700;color:var(--green);white-space:nowrap}.attention .days{color:var(--red)}
-select.status,input.position{width:100%;border:0;outline:0;background:var(--field);color:#4c5564;border-radius:5px;padding:5px 6px;font-size:9px}.last{text-align:center}.badge{display:inline-block;border-radius:999px;padding:3px 7px;font-size:8px;font-weight:800}.registered,.optional{background:#e8f6ee;color:#248c5b}.last small{display:block;margin-top:2px;color:#9aa1ad;font-size:8px}.controls{display:flex;gap:7px;justify-content:flex-end;margin-top:8px}button{border:1px solid #cbd3df;background:#fff;color:var(--blue);border-radius:6px;padding:7px 10px;font-weight:700;cursor:pointer}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-@media(max-width:900px){.page{padding:8px}.header{padding:12px}.summary{grid-template-columns:repeat(2,1fr)}table{min-width:960px}#storeResult{display:none}}@media print{body{background:#fff}.page{max-width:none;padding:0}.toolbar,.controls{display:none}.store{break-inside:avoid}}
+:root{
+  --blue:#1f3a78;
+  --bg:#eef1f5;
+  --card:#fff;
+  --border:#d9dee8;
+  --field:#f1f4f8;
+  --green:#2aa66b;
+  --yellow:#fff8e7;
+  --red:#dd4035
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:#1f2937;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px
+}
+
+.page{
+  max-width:1200px;
+  margin:auto;
+  padding:10px 12px 18px
+}
+
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:2px solid var(--blue);
+  border-radius:10px;
+  padding:9px 12px;
+  margin:0 0 10px;
+  box-shadow:0 3px 10px rgba(23,51,101,.12)
+}
+
+.toolbar-title{
+  font-size:13px;
+  font-weight:800;
+  color:var(--blue);
+  white-space:nowrap
+}
+
+.toolbar select{
+  border:2px solid var(--blue);
+  border-radius:7px;
+  background:#fff;
+  color:var(--blue);
+  padding:7px 11px;
+  font-size:13px;
+  font-weight:800;
+  min-width:220px;
+  cursor:pointer
+}
+
+#storeResult{
+  margin-left:auto;
+  color:#687386;
+  font-size:11px;
+  font-weight:600
+}
+
+#storeResult:before{
+  content:"●";
+  color:var(--green);
+  margin-right:6px
+}
+
+.header{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start
+}
+
+.brand,
+h1{
+  color:var(--blue);
+  margin:0;
+  font-weight:800
+}
+
+.brand{font-size:20px}
+
+h1{
+  font-size:21px;
+  line-height:1.05;
+  margin-top:2px
+}
+
+.subtitle{
+  color:#89919e;
+  font-size:10px;
+  margin-top:4px
+}
+
+.updated{
+  color:#929aa7;
+  font-size:9px;
+  margin-top:2px
+}
+
+.total-box{
+  width:92px;
+  min-height:62px;
+  background:var(--blue);
+  color:#fff;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center
+}
+
+.total-box .label,
+.total-box .foot{
+  font-size:9px;
+  opacity:.9
+}
+
+.total-box .n{
+  font-size:25px;
+  font-weight:800;
+  line-height:1;
+  margin:3px 0
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:9px 0
+}
+
+.summary-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:9px;
+  min-height:68px;
+  padding:9px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center
+}
+
+.summary-card .icon{
+  font-size:16px;
+  margin-bottom:4px
+}
+
+.summary-card .name{
+  color:var(--blue);
+  font-weight:700;
+  font-size:11px
+}
+
+.summary-card .count{
+  color:var(--blue);
+  font-size:19px;
+  font-weight:800;
+  margin:1px 0
+}
+
+.summary-card .unit{
+  color:#8f97a5;
+  font-size:9px
+}
+
+.notice{
+  background:#eaf2ff;
+  border:1px solid #bdd1f7;
+  color:#3c5687;
+  border-radius:7px;
+  padding:7px 10px;
+  margin-bottom:10px;
+  font-size:10px
+}
+
+.notice.error{
+  background:#fff0ef;
+  border-color:#f0bbb7;
+  color:#a12d25
+}
+
+.notice.success{
+  background:#eaf8f0;
+  border-color:#b9e3ca;
+  color:#23764b
+}
+
+.store{
+  margin-bottom:10px
+}
+
+.store-title{
+  background:var(--blue);
+  color:#fff;
+  font-weight:800;
+  padding:7px 10px;
+  border-radius:8px 8px 0 0;
+  font-size:12px
+}
+
+.table-wrap{
+  background:#fff;
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 8px 8px;
+  overflow-x:auto
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed
+}
+
+thead th{
+  text-align:left;
+  background:#f5f7fa;
+  color:#29406e;
+  font-weight:700;
+  font-size:9px;
+  padding:6px 7px;
+  border-bottom:1px solid #dfe4eb
+}
+
+tbody td{
+  padding:5px 7px;
+  border-bottom:1px solid #ebedf1;
+  vertical-align:middle;
+  font-size:10px
+}
+
+tbody tr:last-child td{
+  border-bottom:none
+}
+
+tbody tr.attention td{
+  background:var(--yellow)
+}
+
+th:nth-child(1),
+td:nth-child(1){
+  width:30px;
+  text-align:center;
+  color:#a0a7b2
+}
+
+th:nth-child(2),
+td:nth-child(2){width:29%}
+
+th:nth-child(3),
+td:nth-child(3){width:9%}
+
+th:nth-child(4),
+td:nth-child(4){width:10%}
+
+th:nth-child(5),
+td:nth-child(5){width:15%}
+
+th:nth-child(6),
+td:nth-child(6){width:20%}
+
+th:nth-child(7),
+td:nth-child(7){width:16%}
+
+.model{
+  font-weight:700;
+  color:#303846;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.plate{
+  background:#eef1f5;
+  border-radius:4px;
+  padding:4px 6px;
+  display:inline-block;
+  color:#4f5968;
+  font-family:Consolas,monospace;
+  font-size:9px
+}
+
+.days{
+  font-weight:700;
+  color:var(--green);
+  white-space:nowrap
+}
+
+.attention .days{
+  color:var(--red)
+}
+
+select.status,
+input.position{
+  width:100%;
+  border:0;
+  outline:0;
+  background:var(--field);
+  color:#4c5564;
+  border-radius:5px;
+  padding:5px 6px;
+  font-size:9px
+}
+
+.last{
+  text-align:center
+}
+
+.badge{
+  display:inline-block;
+  border-radius:999px;
+  padding:3px 7px;
+  font-size:8px;
+  font-weight:800
+}
+
+.registered{
+  background:#e8f6ee;
+  color:#248c5b
+}
+
+.optional{
+  background:#eef1f5;
+  color:#7a8492
+}
+
+.last small{
+  display:block;
+  margin-top:2px;
+  color:#9aa1ad;
+  font-size:8px
+}
+
+.controls{
+  display:flex;
+  gap:7px;
+  justify-content:flex-end;
+  margin-top:8px
+}
+
+button{
+  border:1px solid #cbd3df;
+  background:#fff;
+  color:var(--blue);
+  border-radius:6px;
+  padding:7px 10px;
+  font-weight:700;
+  cursor:pointer
+}
+
+button.primary{
+  background:var(--blue);
+  color:#fff;
+  border-color:var(--blue)
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed
+}
+
+.loading{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:20px;
+  text-align:center;
+  color:#687386
+}
+
+.login-box{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-left:auto
+}
+
+.login-box input{
+  width:150px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:7px;
+  font-size:10px
+}
+
+.login-box button{
+  padding:7px 9px;
+  font-size:10px
+}
+
+@media(max-width:900px){
+
+  .page{
+    padding:8px
+  }
+
+  .header{
+    padding:12px
+  }
+
+  .summary{
+    grid-template-columns:repeat(2,1fr)
+  }
+
+  table{
+    min-width:960px
+  }
+
+  #storeResult{
+    display:none
+  }
+
+  .login-box{
+    display:none
+  }
+}
+
+@media print{
+
+  body{
+    background:#fff
+  }
+
+  .page{
+    max-width:none;
+    padding:0
+  }
+
+  .toolbar,
+  .controls,
+  .login-box{
+    display:none
+  }
+
+  .store{
+    break-inside:avoid
+  }
+}
 </style>
 </head>
-<body><div class="page">
-<div class="toolbar"><div class="toolbar-title">VISUALIZAR LOJA:</div><select id="storeSelect" onchange="filtrarLoja()"><option value="Todas">Todas as lojas</option><option value="Matriz">Matriz</option><option value="Zona Sul">Zona Sul</option><option value="Viamão">Viamão</option><option value="Multimarcas">Multimarcas</option></select><div id="storeResult">Exibindo todas as lojas</div></div>
-<header class="header"><div><div class="brand">SAN MARINO</div><h1>Carros sem fotos no site</h1><div class="subtitle">Situação no NBS: todos disponíveis</div><div class="updated">Atualizado em: <strong>16/09/2026</strong></div></div><div class="total-box"><div class="label">Total:</div><div class="n">36</div><div class="foot">veículos</div></div></header>
-<div class="summary">
-<div class="summary-card"><div class="icon">🏬</div><div class="name">Matriz</div><div class="count">21</div><div class="unit">veículos</div></div>
-<div class="summary-card"><div class="icon">📍</div><div class="name">Zona Sul</div><div class="count">5</div><div class="unit">veículos</div></div>
-<div class="summary-card"><div class="icon">🏁</div><div class="name">Viamão</div><div class="count">4</div><div class="unit">veículos</div></div>
-<div class="summary-card"><div class="icon">🚗</div><div class="name">Multimarcas</div><div class="count">6</div><div class="unit">veículos</div></div>
+
+<body>
+
+<div class="page">
+
+  <!-- BARRA SUPERIOR -->
+  <div class="toolbar">
+
+    <div class="toolbar-title">
+      VISUALIZAR LOJA:
+    </div>
+
+    <select id="storeSelect" onchange="filtrarLoja()">
+      <option value="Todas">Todas as lojas</option>
+    </select>
+
+    <div id="storeResult">
+      Carregando...
+    </div>
+
+    <!-- LOGIN -->
+    <div class="login-box">
+
+      <input
+        type="email"
+        id="email"
+        placeholder="E-mail"
+      >
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Senha"
+      >
+
+      <button onclick="login()">
+        Entrar
+      </button>
+
+      <button onclick="logout()">
+        Sair
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CABEÇALHO -->
+  <header class="header">
+
+    <div>
+
+      <div class="brand">
+        SAN MARINO
+      </div>
+
+      <h1>
+        Carros sem fotos no site
+      </h1>
+
+      <div class="subtitle">
+        Situação no NBS: todos disponíveis
+      </div>
+
+      <div class="updated">
+        Atualizado em:
+        <strong id="updatedDate">--</strong>
+      </div>
+
+    </div>
+
+    <div class="total-box">
+
+      <div class="label">
+        Total:
+      </div>
+
+      <div
+        class="n"
+        id="totalVehicles"
+      >
+        0
+      </div>
+
+      <div class="foot">
+        veículos
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- RESUMO DAS LOJAS -->
+  <div
+    class="summary"
+    id="summary"
+  ></div>
+
+
+  <!-- AVISO -->
+  <div
+    class="notice"
+    id="notice"
+  >
+    <strong>Controle de acompanhamento:</strong>
+    conectando ao banco de dados...
+  </div>
+
+
+  <!-- TABELAS -->
+  <div id="tables">
+
+    <div class="loading">
+      Carregando veículos...
+    </div>
+
+  </div>
+
+
+  <!-- BOTÕES -->
+  <div class="controls">
+
+    <button onclick="window.print()">
+      Imprimir / PDF
+    </button>
+
+    <button
+      class="primary"
+      id="saveButton"
+      onclick="salvar()"
+      disabled
+    >
+      Salvar alterações
+    </button>
+
+  </div>
+
 </div>
-<div class="notice"><strong>Controle de acompanhamento:</strong> </div>
-<div id="tables"></div>
-<div class="controls"><button onclick="window.print()">Imprimir / PDF</button><button class="primary" onclick="salvar()">Salvar alterações</button></div>
-</div>
+
+
 <script>
-const stores={
-"Matriz":[
-["TRACKER 1.0 TURBO FLEX LT AUTOMATICO","JBG6D11",57,"Outro","15/09 - Chapeação - Ag peça","15/09/2026, 11:37",1],
-["ONIX 1.0 MFI JOY 8V FLEX 4P MANUAL","IYF-9454",36,"Outro","15/09 - Ag decisão estoque ou repasse","15/09/2026, 11:37",1],
-["TORO 2.0 16V TURBO DIESEL VOLCANO 4WD AT9","JCG5G42",34,"Outro","15/09 - Fotos essa semana","15/09/2026, 11:37",1],
-["COMPASS 2.0 16V FLEX LONGITUDE AUTOMATICO","IZY5J33",34,"Outro","15/09 - Polimento","15/09/2026, 11:37",1],
-["TORO FREEDOM AT6","IZN2D20",27,"Outro","15/09 - Chapeação","15/09/2026, 11:38",1],
-["PULSE 1.0 TURBO 200 FLEX IMPETUS CVT","JDF1A96",22,"Outro","-","15/09/2026, 11:40",1],
-["CRONOS 1.8 E.TORQ FLEX HGT AT6","JAT9D86",19,"Outro","15/09 - Ag orçamento","15/09/2026, 11:38",1],
-["STRADA 1.3 FIREFLY FLEX VOLCANO CD CVT","JCG3C41",16,"Não informado","Não informada","Nunca informado",0],
-["TORO 2.0 16V TURBO DIESEL VOLCANO 4WD AT9","IYD4G38",16,"Não informado","Não informada","Nunca informado",0],
-["UP! 1.0 MPI TAKE 12V FLEX 4P MANUAL","IXQ4H25",16,"Não informado","Não informada","Nunca informado",0],
-["STRADA ULTRA 1.0 FLEX TURBO CD AUT","JCO8F72",16,"Não informado","Não informada","Nunca informado",0],
-["NOVO FIAT TORO VOLCANO TURBO270 FLEX","JCH0J48",15,"Não informado","Não informada","Nunca informado",0],
-["TORO 1.8 16V EVO FLEX FREEDOM AT6","JAF7H12",15,"Não informado","Não informada","Nunca informado",0],
-["CRONOS DRIVE 1.3 8V FLEX","JBO3A47",15,"Não informado","Não informada","Nunca informado",0],
-["NOVA STRADA VOLCANO CD 1.3 AT FLEX 4P","TQT8G06",15,"Não informado","Não informada","Nunca informado",0],
-["TORO 1.3 TURBO 270 FLEX FREEDOM AT6","JBC4E86",14,"Não informado","Não informada","Nunca informado",0],
-["TORO FREEDOM 270 AT FLEX","TQU4G12",14,"Não informado","Não informada","Nunca informado",0],
-["TORO VOLCANO TURBO270 FLEX","JCE8G99",14,"Não informado","Não informada","Nunca informado",0],
-["STRADA 1.3 FIREFLY FLEX VOLCANO CD AUT.","JBX3G93",13,"Não informado","Não informada","Nunca informado",0],
-["ARGO HGT 1.8","IZG9E80",5,"Não informado","Não informada","Nunca informado",0],
-["PULSE 1.3 FLEX DRIVE MANUAL","JCD0G33",2,"Não informado","Não informada","Nunca informado",0]],
-"Zona Sul":[
-["KWID 1.0 12V SCE FLEX ZEN MANUAL","STZ9I10",15,"Não informado","Não informada","Nunca informado",0],["OROCH 16","JCZ4G17",7,"Não informado","Não informada","Nunca informado",0],["ARGO 1.0 FIREFLY FLEX MANUAL","IZF9A59",6,"Não informado","Não informada","Nunca informado",0],["ONIX 1.0 FLEX PLUS LT MANUAL","JCO1E38",5,"Não informado","Não informada","Nunca informado",0],["STRADA VOLCANO 1.3 FLEX 8V CD","JCG7H19",5,"Não informado","Não informada","Nunca informado",0]],
-"Viamão":[
-["STRADA ULTRA 1.0 FLEX TURBO CD AUT","JCP5B40",29,"Outro","15/09 - Fotos na semana","15/09/2026, 11:39",1],["CRONOS HGT AT 6 F","IZU6H62",19,"Outro","15/09 - Fotos na semana","15/09/2026, 11:39",1],["ARGO DRIVE 1.0","TQV4C36",13,"Não informado","Não informada","Nunca informado",0],["2008 1.6 16V FLEX GRIFFE 4P AUTOMATICO","JAD3E66",6,"Não informado","Não informada","Nunca informado",0]],
-"Multimarcas":[
-["RENEGADE 1.3 T270 TURBO FLEX LONGITUDE AT6","JBG7G94",15,"Não informado","Não informada","Nunca informado",0],["T-CROSS 200 TSI 1.0 FLEX 12V 5P AUT.","JAK9H85",12,"Não informado","Não informada","Nunca informado",0],["KARDIAN 1.0 TCE FLEX EVOLUTION EDC","JCU3A49",7,"Não informado","Não informada","Nunca informado",0],["HB20 1.0 12V FLEX VISION MANUAL","JAO8E35",6,"Não informado","Não informada","Nunca informado",0],["CRONOS 1.3 FIREFLY FLEX DRIVE MANUAL","JBG4I68",5,"Não informado","Não informada","Nunca informado",0],["FIORINO 1.3 FIREFLY FLEX ENDURANCE MANUAL","TQT6E23",5,"Não informado","Não informada","Nunca informado",0]]};
-const icons={"Matriz":"🏬","Zona Sul":"📍","Viamão":"🏁","Multimarcas":"🚗"};
-const statuses=["Não informado","Aguardando fotos","Em deslocamento","No pátio","Em preparação","Fotos realizadas","Outro"];
-let key=0;
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
-function opts(cur){return statuses.map(s=>`<option ${s===cur?'selected':''}>${esc(s)}</option>`).join('')}
-for(const [name,rows] of Object.entries(stores)){
- let trs='';
- rows.forEach((r,i)=>{const [model,plate,days,status,pos,info,reg]=r;key++;trs+=`<tr class="${days>=17?'attention':''}"><td class="num">${i+1}</td><td class="model">${esc(model)}</td><td><span class="plate">${esc(plate)}</span></td><td class="days"><span>${days}</span> dias</td><td><select class="status" data-key="${key}">${opts(status)}</select></td><td><input class="position" data-key="${key}" value="${esc(pos)}"></td><td class="last"><span class="badge ${reg?'registered':'optional'}">${reg?'REGISTRADO':'OPCIONAL'}</span><small>${esc(reg?info:'Nunca informado')}</small></td></tr>`});
- document.getElementById('tables').insertAdjacentHTML('beforeend',`<section class="store" data-store="${esc(name)}"><div class="store-title"><span>${icons[name]}</span> ${esc(name)}</div><div class="table-wrap"><table><thead><tr><th>#</th><th>Modelo</th><th>Placa</th><th>Dias no NBS</th><th>Status</th><th>Posição atual</th><th>Última informação</th></tr></thead><tbody>${trs}</tbody></table></div></section>`)
+
+/* =========================================================
+   SUPABASE
+   ========================================================= */
+
+/*
+   URL do seu projeto
+*/
+const SUPABASE_URL =
+  'https://zbjkznbfxpvikpkvildc.supabase.co';
+
+
+/*
+   COLE AQUI SUA PUBLISHABLE KEY / ANON KEY.
+
+   NÃO use a service_role / secret key.
+*/
+const SUPABASE_KEY =
+  'sb_publishable_UGHni23oo51NsjsDhpkjYA_XnYMCmTI';
+
+
+/*
+   Cliente do Supabase
+*/
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =========================================================
+   CONFIGURAÇÕES
+   ========================================================= */
+
+const icons = {
+  "Matriz":"🏬",
+  "Zona Sul":"📍",
+  "Viamão":"🏁",
+  "Multimarcas":"🚗"
+};
+
+
+const statuses = [
+  "Não informado",
+  "Aguardando fotos",
+  "Em deslocamento",
+  "No pátio",
+  "Em preparação",
+  "Fotos realizadas",
+  "Outro"
+];
+
+
+let vehicles = [];
+
+
+/* =========================================================
+   ESCAPAR HTML
+   ========================================================= */
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/[&<>"']/g, function(char){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[char];
+
+    });
+
 }
-const STORAGE='san-marino-16092026';
-function salvar(){const d={};document.querySelectorAll('[data-key]').forEach(e=>d[e.dataset.key]=e.value);localStorage.setItem(STORAGE,JSON.stringify(d));alert('Alterações salvas neste navegador.')}
-function filtrarLoja(){const loja=document.getElementById('storeSelect').value;document.querySelectorAll('.store').forEach(s=>s.style.display=(loja==='Todas'||s.dataset.store===loja)?'':'none');document.getElementById('storeResult').textContent=loja==='Todas'?'Exibindo todas as lojas':'Exibindo somente: '+loja;localStorage.setItem(STORAGE+'-loja',loja)}
-(()=>{try{const d=JSON.parse(localStorage.getItem(STORAGE)||'null');if(d)document.querySelectorAll('[data-key]').forEach(e=>{if(d[e.dataset.key]!==undefined)e.value=d[e.dataset.key]});document.getElementById('storeSelect').value=localStorage.getItem(STORAGE+'-loja')||'Todas'}catch(e){}filtrarLoja()})();
-</script></body></html>
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+function criarOptionsStatus(atual){
+
+  return statuses.map(function(status){
+
+    return `
+      <option
+        value="${esc(status)}"
+        ${status === atual ? 'selected' : ''}
+      >
+        ${esc(status)}
+      </option>
+    `;
+
+  }).join('');
+
+}
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+function formatarData(data){
+
+  if(!data){
+    return 'Nunca informado';
+  }
+
+  const d = new Date(data);
+
+  if(isNaN(d.getTime())){
+    return 'Nunca informado';
+  }
+
+  return d.toLocaleString('pt-BR');
+
+}
+
+
+/* =========================================================
+   AVISO
+   ========================================================= */
+
+function mostrarAviso(texto, tipo){
+
+  const aviso =
+    document.getElementById('notice');
+
+  aviso.className = 'notice';
+
+  if(tipo){
+    aviso.classList.add(tipo);
+  }
+
+  aviso.innerHTML = texto;
+
+}
+
+
+/* =========================================================
+   CARREGAR VEÍCULOS
+   ========================================================= */
+
+async function carregarVeiculos(){
+
+  const tables =
+    document.getElementById('tables');
+
+  tables.innerHTML =
+    '<div class="loading">Carregando veículos...</div>';
+
+
+  try{
+
+    const resultado =
+      await supabaseClient
+        .from('veiculos')
+        .select('*')
+        .order('loja', {
+          ascending:true
+        })
+        .order('dias', {
+          ascending:false
+        });
+
+
+    if(resultado.error){
+      throw resultado.error;
+    }
+
+
+    vehicles =
+      resultado.data || [];
+
+
+    renderizar();
+
+
+    document
+      .getElementById('saveButton')
+      .disabled =
+        vehicles.length === 0;
+
+
+    mostrarAviso(
+      '<strong>Conectado:</strong> os veículos estão sendo carregados diretamente do Supabase.',
+      'success'
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    tables.innerHTML = `
+      <div class="loading">
+
+        <strong>Erro ao carregar os veículos.</strong>
+
+        <br><br>
+
+        ${esc(error.message)}
+
+      </div>
+    `;
+
+
+    mostrarAviso(
+      `<strong>Erro ao conectar ao Supabase:</strong>
+       ${esc(error.message)}`,
+      'error'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDERIZAR
+   ========================================================= */
+
+function renderizar(){
+
+  const tables =
+    document.getElementById('tables');
+
+  tables.innerHTML = '';
+
+
+  const lojas = {};
+
+
+  vehicles.forEach(function(vehicle){
+
+    const loja =
+      vehicle.loja || 'Sem loja';
+
+
+    if(!lojas[loja]){
+      lojas[loja] = [];
+    }
+
+
+    lojas[loja].push(vehicle);
+
+  });
+
+
+  /* TOTAL */
+
+  document
+    .getElementById('totalVehicles')
+    .textContent =
+      vehicles.length;
+
+
+  /* SELECT DE LOJAS */
+
+  const select =
+    document.getElementById('storeSelect');
+
+  const lojaSelecionada =
+    select.value || 'Todas';
+
+
+  select.innerHTML =
+    '<option value="Todas">Todas as lojas</option>';
+
+
+  const lojasOrdenadas =
+    Object.keys(lojas).sort();
+
+
+  lojasOrdenadas.forEach(function(loja){
+
+    const option =
+      document.createElement('option');
+
+    option.value = loja;
+    option.textContent = loja;
+
+    select.appendChild(option);
+
+  });
+
+
+  if(
+    lojaSelecionada === 'Todas' ||
+    lojas[lojaSelecionada]
+  ){
+
+    select.value =
+      lojaSelecionada;
+
+  }else{
+
+    select.value = 'Todas';
+
+  }
+
+
+  /* RESUMO */
+
+  const summary =
+    document.getElementById('summary');
+
+  summary.innerHTML = '';
+
+
+  const ordemResumo = [
+    'Matriz',
+    'Zona Sul',
+    'Viamão',
+    'Multimarcas'
+  ];
+
+
+  ordemResumo.forEach(function(loja){
+
+    if(!lojas[loja]){
+      return;
+    }
+
+
+    const card =
+      document.createElement('div');
+
+    card.className =
+      'summary-card';
+
+
+    card.innerHTML = `
+
+      <div class="icon">
+        ${icons[loja] || '🚗'}
+      </div>
+
+      <div class="name">
+        ${esc(loja)}
+      </div>
+
+      <div class="count">
+        ${lojas[loja].length}
+      </div>
+
+      <div class="unit">
+        veículos
+      </div>
+
+    `;
+
+
+    summary.appendChild(card);
+
+  });
+
+
+  /* LOJAS FORA DA ORDEM PADRÃO */
+
+  lojasOrdenadas
+    .filter(function(loja){
+
+      return !ordemResumo.includes(loja);
+
+    })
+    .forEach(function(loja){
+
+      const card =
+        document.createElement('div');
+
+      card.className =
+        'summary-card';
+
+
+      card.innerHTML = `
+
+        <div class="icon">
+          🚗
+        </div>
+
+        <div class="name">
+          ${esc(loja)}
+        </div>
+
+        <div class="count">
+          ${lojas[loja].length}
+        </div>
+
+        <div class="unit">
+          veículos
+        </div>
+
+      `;
+
+
+      summary.appendChild(card);
+
+    });
+
+
+  /* TABELAS */
+
+  const ordemLojas = [
+    ...ordemResumo,
+    ...lojasOrdenadas.filter(function(loja){
+      return !ordemResumo.includes(loja);
+    })
+  ];
+
+
+  ordemLojas.forEach(function(loja){
+
+    if(!lojas[loja]){
+      return;
+    }
+
+
+    let linhas = '';
+
+
+    lojas[loja].forEach(function(vehicle, index){
+
+      const dias =
+        Number(vehicle.dias) || 0;
+
+
+      const status =
+        vehicle.status ||
+        'Não informado';
+
+
+      const posicao =
+        vehicle.posicao ||
+        '';
+
+
+      const atualizado =
+        vehicle.atualizado_em ||
+        null;
+
+
+      const registrado =
+        !!atualizado ||
+        (
+          status &&
+          status !== 'Não informado'
+        );
+
+
+      linhas += `
+
+        <tr
+          data-id="${esc(vehicle.id)}"
+        >
+
+          <td>
+            ${index + 1}
+          </td>
+
+
+          <td class="model">
+            ${esc(vehicle.modelo)}
+          </td>
+
+
+          <td>
+
+            <span class="plate">
+              ${esc(vehicle.placa)}
+            </span>
+
+          </td>
+
+
+          <td class="days">
+
+            ${dias} dias
+
+          </td>
+
+
+          <td>
+
+            <select
+              class="status"
+              data-id="${esc(vehicle.id)}"
+              onchange="marcarAlterado(this)"
+            >
+
+              ${criarOptionsStatus(status)}
+
+            </select>
+
+          </td>
+
+
+          <td>
+
+            <input
+              class="position"
+              data-id="${esc(vehicle.id)}"
+              value="${esc(posicao)}"
+              placeholder="Digite a posição"
+              oninput="marcarAlterado(this)"
+            >
+
+          </td>
+
+
+          <td class="last">
+
+            <span
+              class="badge ${
+                registrado
+                  ? 'registered'
+                  : 'optional'
+              }"
+            >
+
+              ${
+                registrado
+                  ? 'REGISTRADO'
+                  : 'OPCIONAL'
+              }
+
+            </span>
+
+
+            <small>
+              ${formatarData(atualizado)}
+            </small>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    });
+
+
+    const section =
+      document.createElement('section');
+
+    section.className =
+      'store';
+
+    section.dataset.store =
+      loja;
+
+
+    section.innerHTML = `
+
+      <div class="store-title">
+
+        ${icons[loja] || '🚗'}
+        ${esc(loja)}
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>#</th>
+
+              <th>Modelo</th>
+
+              <th>Placa</th>
+
+              <th>Dias no NBS</th>
+
+              <th>Status</th>
+
+              <th>Posição atual</th>
+
+              <th>Última informação</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            ${linhas}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    `;
+
+
+    tables.appendChild(section);
+
+  });
+
+
+  filtrarLoja();
+
+
+  document
+    .getElementById('updatedDate')
+    .textContent =
+      new Date().toLocaleDateString('pt-BR');
+
+}
+
+
+/* =========================================================
+   MARCAR ALTERAÇÃO
+   ========================================================= */
+
+function marcarAlterado(elemento){
+
+  const linha =
+    elemento.closest('tr');
+
+
+  if(linha){
+
+    linha.dataset.changed =
+      'true';
+
+  }
+
+
+  document
+    .getElementById('saveButton')
+    .disabled =
+      false;
+
+}
+
+
+/* =========================================================
+   SALVAR
+   ========================================================= */
+
+async function salvar(){
+
+  const button =
+    document.getElementById('saveButton');
+
+
+  button.disabled = true;
+
+  button.textContent =
+    'Salvando...';
+
+
+  try{
+
+    /* Verifica se está logado */
+
+    const {
+      data,
+      error: authError
+    } =
+      await supabaseClient.auth.getUser();
+
+
+    if(authError){
+      throw authError;
+    }
+
+
+    if(!data.user){
+
+      mostrarAviso(
+        '<strong>Você precisa entrar com seu usuário para salvar alterações.</strong>',
+        'error'
+      );
+
+      button.disabled = false;
+
+      button.textContent =
+        'Salvar alterações';
+
+      return;
+
+    }
+
+
+    const linhasAlteradas =
+      document.querySelectorAll(
+        'tr[data-changed="true"]'
+      );
+
+
+    if(linhasAlteradas.length === 0){
+
+      mostrarAviso(
+        'Nenhuma alteração para salvar.',
+        'success'
+      );
+
+      button.disabled = false;
+
+      button.textContent =
+        'Salvar alterações';
+
+      return;
+
+    }
+
+
+    for(
+      const linha of linhasAlteradas
+    ){
+
+      const id =
+        linha.dataset.id;
+
+
+      const status =
+        linha.querySelector('.status').value;
+
+
+      const posicao =
+        linha.querySelector('.position').value;
+
+
+      const resultado =
+        await supabaseClient
+          .from('veiculos')
+          .update({
+
+            status:
+              status,
+
+            posicao:
+              posicao,
+
+            atualizado_em:
+              new Date().toISOString()
+
+          })
+          .eq(
+            'id',
+            id
+          );
+
+
+      if(resultado.error){
+
+        throw resultado.error;
+
+      }
+
+    }
+
+
+    mostrarAviso(
+      '<strong>Alterações salvas com sucesso!</strong> Os dados foram atualizados no banco.',
+      'success'
+    );
+
+
+    await carregarVeiculos();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    mostrarAviso(
+      `<strong>Erro ao salvar:</strong>
+       ${esc(error.message)}`,
+      'error'
+    );
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    'Salvar alterações';
+
+}
+
+
+/* =========================================================
+   FILTRAR LOJA
+   ========================================================= */
+
+function filtrarLoja(){
+
+  const loja =
+    document.getElementById('storeSelect').value;
+
+
+  document
+    .querySelectorAll('.store')
+    .forEach(function(section){
+
+      if(
+        loja === 'Todas' ||
+        section.dataset.store === loja
+      ){
+
+        section.style.display =
+          '';
+
+      }else{
+
+        section.style.display =
+          'none';
+
+      }
+
+    });
+
+
+  document
+    .getElementById('storeResult')
+    .textContent =
+      loja === 'Todas'
+        ? 'Exibindo todas as lojas'
+        : 'Exibindo somente: ' + loja;
+
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+async function login(){
+
+  const email =
+    document
+      .getElementById('email')
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById('password')
+      .value;
+
+
+  if(!email || !password){
+
+    mostrarAviso(
+      '<strong>Informe o e-mail e a senha.</strong>',
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const resultado =
+      await supabaseClient.auth
+        .signInWithPassword({
+
+          email:
+            email,
+
+          password:
+            password
+
+        });
+
+
+    if(resultado.error){
+
+      throw resultado.error;
+
+    }
+
+
+    mostrarAviso(
+      '<strong>Login realizado!</strong> Agora você pode salvar alterações.',
+      'success'
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    mostrarAviso(
+      `<strong>Erro no login:</strong>
+       ${esc(error.message)}`,
+      'error'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+async function logout(){
+
+  const resultado =
+    await supabaseClient
+      .auth
+      .signOut();
+
+
+  if(resultado.error){
+
+    mostrarAviso(
+      `<strong>Erro ao sair:</strong>
+       ${esc(resultado.error.message)}`,
+      'error'
+    );
+
+    return;
+
+  }
+
+
+  mostrarAviso(
+    'Você saiu da conta.',
+    ''
+  );
+
+}
+
+
+/* =========================================================
+   INICIAR
+   ========================================================= */
+
+async function iniciar(){
+
+  await carregarVeiculos();
+
+}
+
+
+iniciar();
+
+
+/* =========================================================
+   OBSERVAR LOGIN / LOGOUT
+   ========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  function(event, session){
+
+    console.log(
+      'Estado de autenticação:',
+      event,
+      session?.user?.email || 'não logado'
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>
